@@ -1,0 +1,43 @@
+# General
+*.log
+*.pid
+*.pid.lock
+*.tmp
+.nojekyll
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Go
+/vendor/
+*.bin
+*.bin.*
+*.o
+*.a
+*.out
+*.test
+
+# Docker
+**/Dockerfile.*.tmp
+
+# Helm
+**/charts/*.tgz
+**/tmpcharts/
+**/.helmignore
+**/charts/*.lock
+
+# Skaffold
+.skaffold/
+
+# Git and additional directories/files to ignore
+.git/
+*.gitattributes
+*.gitkeep
+
+# Specific to your project structure, adjust as necessary
+# Ignore environment-specific files, logs, and binaries
+go-webserver/charts/
+go-webserver/tmpcharts/
+go-webserver/.helmignore

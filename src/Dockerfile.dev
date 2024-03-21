@@ -1,0 +1,7 @@
+FROM golang:alpine
+RUN apk add --no-cache git
+RUN go install github.com/cosmtrek/air@latest
+COPY . /app
+WORKDIR /app
+CMD ["air", "server", "-p", "8080"]
+EXPOSE 8080

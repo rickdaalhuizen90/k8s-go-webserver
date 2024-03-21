@@ -1,0 +1,37 @@
+apiVersion: skaffold/v2beta14
+kind: Config
+build:
+  artifacts:
+  - image: go-webserver
+    context: ./src
+profiles:
+  - name: dev
+    build:
+      artifacts:
+      - image: go-webserver
+        context: ./src
+        docker:
+          dockerfile: Dockerfile.dev
+        sync:
+          manual:
+            - src: 'templates/**/*.html'
+              dest: .
+            - src: '**/*.go'
+              dest: .
+  - name: prod
+    build:
+      artifacts:
+      - image: go-webserver
+        context: ./src
+        docker:
+          dockerfile: Dockerfile.prod
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/*.yaml
+portForward:
+  - resourceType: service
+    resourceName: go-webserver
+    namespace: default
+    port: 8080
+    localPort: 8080
