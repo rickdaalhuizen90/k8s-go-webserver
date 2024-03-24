@@ -1,6 +1,7 @@
-FROM golang:alpine
-COPY . /app/
-WORKDIR /app 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /bin/webserver .
-CMD ["/bin/webserver"]
+FROM golang:1.22-alpine
+
+WORKDIR /app
+COPY . .
+RUN go build -o webserver .
+CMD ["./webserver"]
 EXPOSE 8080
